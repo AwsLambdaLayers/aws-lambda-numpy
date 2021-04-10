@@ -41,31 +41,31 @@ Go to [AWSLambdas.com](https://www.awslambdas.com/layers/1/aws-lambda-numpy-scip
 ## Set some environment variables
 To simplify the process, let's create some environment variables.
 ```
-export AWSLL_RUNTIME=python3.8
-export AWSLL_RAMDOM=$RANDOM-$RANDOM
-export AWSLL_LAYER_NAME=awsll-python38-numpy1201
-export AWSLL_BUCKET=awslambdas-com-$AWSLL_RAMDOM
-export AWSLL_LAYER_PACKAGE=$AWSLL_LAYER_NAME.zip
+export AWSL_RUNTIME=python3.8
+export AWSL_RAMDOM=$RANDOM-$RANDOM
+export AWSL_LAYER_NAME=awsll-python38-numpy1201
+export AWSL_BUCKET=awslambdas-com-$AWSL_RAMDOM
+export AWSL_LAYER_PACKAGE=$AWSL_LAYER_NAME.zip
 ```
 
 ## Create a S3 bucket
 You need a bucket to store the layer's zip file.
 ```
-aws s3 mb s3://$AWSLL_BUCKET
+aws s3 mb s3://$AWSL_BUCKET
 ```
 
 ## Upload the layer package (zip)
 ```
-aws s3 cp $AWSLL_LAYER_PACKAGE s3://$AWSLL_BUCKET/$AWSLL_LAYER_PACKAGE
+aws s3 cp $AWSL_LAYER_PACKAGE s3://$AWSL_BUCKET/$AWSL_LAYER_PACKAGE
 ```
 
 ## Create a Lambda layer
 ```
 aws lambda publish-layer-version \
-    --layer-name $AWSLL_LAYER_NAME \
+    --layer-name $AWSL_LAYER_NAME \
     --license-info "MIT" \
-    --content S3Bucket=$AWSLL_BUCKET,S3Key=$AWSLL_LAYER_PACKAGE \
-    --compatible-runtimes $AWSLL_RUNTIME
+    --content S3Bucket=$AWSL_BUCKET,S3Key=$AWSL_LAYER_PACKAGE \
+    --compatible-runtimes $AWSL_RUNTIME
 ```
 
 Copy to the clipboard the value of "LayerVersionArn" from the command response and follow the instructions: [How to create a Lambda with a Numpy layer attached](#three)
@@ -82,14 +82,14 @@ Replace the text "PASTE HERE YOUR LAYER ARN" with the ARN previously obtained.
 ## Set some environment variables
 To simplify the process, let's create a couple of environment variables.
 ```
-export AWSLL_RAMDOM=$RANDOM-$RANDOM
-export AWSLL_STACK_NAME=awslambdas-lambda-numpy
+export AWSL_RAMDOM=$RANDOM-$RANDOM
+export AWSL_STACK_NAME=awslambdas-lambda-numpy
 ```
 
 ## Create a S3 bucket
 AWS SAM need this to store some information about the deployment.
 ```
-aws s3 mb s3://$AWSLL_STACK_NAME-$AWSLL_RAMDOM
+aws s3 mb s3://$AWSL_STACK_NAME-$AWSL_RAMDOM
 ```
 
 ## Build and deploy the Lambda
@@ -112,7 +112,7 @@ def lambda_handler(event, context):
 Run the following commands to build and deploy the project to AWS:
 ```
 sam build
-sam deploy --stack-name $AWSLL_STACK_NAME --s3-bucket $AWSLL_STACK_NAME-$AWSLL_RAMDOM --capabilities CAPABILITY_IAM
+sam deploy --stack-name $AWSL_STACK_NAME --s3-bucket $AWSL_STACK_NAME-$AWSL_RAMDOM --capabilities CAPABILITY_IAM
 ```
 
 ## Test your Lambda
@@ -131,13 +131,13 @@ Congratulations! You have now a base Lambda project that you can use to build on
 ## Clean-up
 Remove the Lambda and Api Gateway
 ```
-aws cloudformation delete-stack --stack-name $AWSLL_STACK_NAME
+aws cloudformation delete-stack --stack-name $AWSL_STACK_NAME
 ```
 
 Wait a few seconds to allow the previous command to finish. Then, use the following commands to remove the s3 buckets.
 ```
-aws s3 rb s3://$AWSLL_STACK_NAME-$AWSLL_RAMDOM --force
+aws s3 rb s3://$AWSL_STACK_NAME-$AWSL_RAMDOM --force
 
 # If the zip file was used
-aws s3 rb s3://$AWSLL_BUCKET --force
+aws s3 rb s3://$AWSL_BUCKET --force
 ```
