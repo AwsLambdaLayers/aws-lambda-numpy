@@ -1,6 +1,6 @@
 # AWS Lambda with Numpy
 
-A demonstration project and template to deploy a AWS Lambda Function with Numpy and SciPy based on layers provided by [AWSLambdas.com](https://www.awslambdas.com).
+A demonstration project and template to deploy a AWS Lambda Function with Numpy and SciPy based on layers provided by [MLPacks.com](https://www.mlpacks.com).
 
 NumPy and SciPy are popular scientific python libraries extensively used for Machine learning.   
 On the other hand, the simplicity and cost-efficiency of Lambdas make it worthwhile to consider for certain use cases where Numpy and SciPy are the go-to tools.
@@ -11,7 +11,7 @@ and the [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/ser
 
 # Get a copy
 ```
-git clone https://github.com/AwsLambdas/aws-lambda-numpy.git
+git clone https://github.com/mlpacks/aws-lambda-numpy.git
 ```
 
 # Guide
@@ -22,7 +22,7 @@ git clone https://github.com/AwsLambdas/aws-lambda-numpy.git
 
 # <a name="one" id="one"></a>How to create a Numpy layer from AWS Lambdas GUI
 
-Go to [AWSLambdas.com](https://www.awslambdas.com/layers/1/aws-lambda-numpy-scipy-python38-layer/free) and click the button "Deploy to AWS".
+Go to [MLPacks.com](https://www.mlpacks.com/layers/1/aws-lambda-numpy-scipy-python38-layer/free) and click the button "Deploy to AWS".
 
 ![Get this layer for free! Download or Deploy to AWS](img/deploy-to-aws.png)
 
@@ -34,7 +34,7 @@ Click the button "Create Layer", and your layer will be created in a few seconds
 
 # <a name="two" id="two"></a>How to create a Numpy layer from a zip file
 
-Go to [AWSLambdas.com](https://www.awslambdas.com/layers/1/aws-lambda-numpy-scipy-python38-layer/free) and click the "Download" button. Then, copy the zip file to your project clone's root directory.
+Go to [MLPacks.com](https://www.mlpacks.com/layers/1/aws-lambda-numpy-scipy-python38-layer/free) and click the "Download" button. Then, copy the zip file to your project clone's root directory.
 
 ![Get this layer for free! Download or Deploy to AWS](img/deploy-to-aws.png)
 
